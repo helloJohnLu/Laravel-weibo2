@@ -5,3 +5,4 @@ Route::get('/about','StaticPagesController@about')->name('about');
 
 // 用户注册
 Route::get('signup','UsersController@create')->name('signup');
+Route::resource('users',    'UsersController');
