@@ -38,10 +38,15 @@ class UsersController extends Controller
         return redirect()->route('users.show',[$user]);
     }
 
-
     // 显示用户信息
     public function show(User $user)
     {
         return view('users.show',compact('user'));
+    }
+
+    /* 渲染编辑表单 */
+    public function edit(User $user)
+    {
+        return view('users.edit',compact('user'));
     }
 }
