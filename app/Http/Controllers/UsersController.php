@@ -30,6 +30,8 @@ class UsersController extends Controller
             'password'  =>  bcrypt($request->password),
         ]);
 
+        \Auth::login($user);    // 用户注册后自动登录
+
         /* 显示注册成功的提示信息 */
         session()->flash('success','欢迎，您将在这里开启一段新的旅程~');
 
