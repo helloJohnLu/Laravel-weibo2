@@ -7,6 +7,14 @@ use Illuminate\Http\Request;
 
 class UsersController extends Controller
 {
+    /* 过滤 */
+    public function __construct()
+    {
+        $this->middleware('auth', [
+            'except'    =>  ['show','create','store']
+        ]);
+    }
+
     // 用户注册页面 渲染
     public function create()
     {
@@ -47,6 +55,8 @@ class UsersController extends Controller
     /* 渲染编辑表单 */
     public function edit(User $user)
     {
+        /* 授权 */
+        $this->authorize('update', $user);
         return view('users.edit',compact('user'));
     }
 
@@ -58,6 +68,9 @@ class UsersController extends Controller
             'name'      =>  'required|max:50|min:3',
             'password'  =>  'nullable|confirmed|min:6'
         ]);
+
+        /* 授权验证 */
+        $this->authorize('update', $user);
 
         /* 更新逻辑 */
         $data = [];
