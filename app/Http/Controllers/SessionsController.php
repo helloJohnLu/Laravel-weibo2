@@ -31,14 +31,25 @@ class SessionsController extends Controller
         ]);
 
         /* 逻辑 */
-        if (\Auth::attempt($credentials)) {
+        if (\Auth::attempt($credentials, $request->has('remember'))) {
             session()->flash('success', '欢迎回来！');
             return redirect()->route('users.show',[\Auth::user()]);
         }else{
             /* 消息提示和页面重定向 */
             session()->flash('danger','很抱歉，您的邮箱与密码不匹配');
-
             return redirect()->back();
         }
+    }
+
+    /**
+     * 退出登录
+     *
+     * @return
+     */
+    public function destroy()
+    {
+        \Auth::logout();
+        session()->flash('success', '您已成功退出！');
+        return redirect('login');
     }
 }
