@@ -21,6 +21,7 @@
 
                     <div class="form-group">
                         <label for="password">密码：</label>
+                        <a href="{{ route('password.request') }}" style="display: inline-block; float: right;">忘记密码？</a>
                         <input type="password" name="password" class="form-control" value="{{ old('password') }}">
                     </div>
 
